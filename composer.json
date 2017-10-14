@@ -1,5 +1,5 @@
 {
-    "name": "kra8/snowflake",
+    "name": "kra8/laravel-snowflake",
     "description": "Snowflake for Laravel.",
     "keywords": ["snowflake", "laravel"],
     "authors": [{
