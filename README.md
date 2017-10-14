@@ -24,9 +24,9 @@ $id = $snowflake->next();
 
 # Configuration
 If `config/snowflake.php` not exist, run below:
-``` php
+```
 php artisan vendor:publish
 ```
 
 # Licence
-[MIT licence]()
+[MIT licence](https://github.com/kra8/laravel-snowflake/blob/master/LICENSE)
