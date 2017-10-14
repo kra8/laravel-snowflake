@@ -1,0 +1,30 @@
+{
+    "name": "kra8/snowflake",
+    "description": "Snowflake for Laravel.",
+    "keywords": ["snowflake", "laravel"],
+    "authors": [{
+        "name": "Koki Asai",
+        "email": "koki@asai.email"
+    }],
+    "homepage" : "https://github.com/kra8/laravel-snowflake",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev" : {
+		"phpunit/phpunit": "~6.0",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kra8\\Snowflake\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kra8\\Snowflake\\SnowflakeServiceProvider"
+            ]
+        }
+    }
+}
