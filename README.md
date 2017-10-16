@@ -22,20 +22,20 @@ Generate snowflake identifier
 $id = $snowflake->next();
 ```
 # Usage with Eloquent
-Add the `Kra8\Snowflake\HasSnowflake` trait to your Eloquent model.
+Add the `Kra8\Snowflake\HasSnowflakePrimary` trait to your Eloquent model.
 This trait make type `snowflake` of primary key.  Don't forget to set the Auto increment property to false.
 
 ``` php
 <?php
 namespace App;
 
-use Kra8\Snowflake\HasSnowflake;
+use Kra8\Snowflake\HasSnowflakePrimary;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasSnowflake, Notifiable;
+    use HasSnowflakePrimary, Notifiable;
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -46,7 +46,7 @@ class User extends Authenticatable
 }
 ```
 
-Finally, in migrations, set the primary key to `bigInteger` and `unique`.
+Finally, in migrations, set the primary key to `bigInteger` and `primary`.
 
 ``` php
 /**
@@ -58,7 +58,7 @@ public function up()
 {
     Schema::create('users', function (Blueprint $table) {
         // $table->increments('id');
-        $table->bigInteger('id')->unique();
+        $table->bigInteger('id')->primary();
         $table->string('name');
         $table->string('email')->unique();
         $table->string('password');
