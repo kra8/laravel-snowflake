@@ -1,5 +1,5 @@
 # Laravel Snowflake
-This Laravel package to generate snowflake identifier.
+This Laravel package to generate 64 bit identifier like the snowflake within Twitter.
 
 # Installation
 ```
@@ -21,6 +21,53 @@ Generate snowflake identifier
 ```
 $id = $snowflake->next();
 ```
+# Usage with Eloquent
+Add the `Kra8\Snowflake\HasSnowflake` trait to your Eloquent model.
+This trait make type `snowflake` of primary key.  Don't forget to set the Auto increment property to false.
+
+``` php
+<?php
+namespace App;
+
+use Kra8\Snowflake\HasSnowflake;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasSnowflake, Notifiable;
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+}
+```
+
+Finally, in migrations, set the primary key to `bigInteger` and `unique`.
+
+``` php
+/**
+ * Run the migrations.
+ *
+ * @return void
+ */
+public function up()
+{
+    Schema::create('users', function (Blueprint $table) {
+        // $table->increments('id');
+        $table->bigInteger('id')->unique();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->rememberToken();
+        $table->timestamps();
+    });
+}
+```
+
 
 # Configuration
 If `config/snowflake.php` not exist, run below:
