@@ -3,9 +3,9 @@ namespace Kra8\Snowflake;
 
 use Kra8\Snowflake\Snowflake;
 
-trait HasSnowflake
+trait HasSnowflakePrimary
 {
-    public static function bootHasSnowflake()
+    public static function bootHasSnowflakePrimary()
     {
         static::saving(function ($model) {
             if (is_null($model->getKey())) {
