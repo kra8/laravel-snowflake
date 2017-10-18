@@ -1,4 +1,8 @@
 # Laravel Snowflake
+[![Build Status](https://travis-ci.org/kra8/laravel-snowflake.svg?branch=setup-travis)](https://travis-ci.org/kra8/laravel-snowflake)
+[![Latest Stable Version](https://poser.pugx.org/kra8/laravel-snowflake/v/stable)](https://packagist.org/packages/kra8/laravel-snowflake)
+[![License](https://poser.pugx.org/kra8/laravel-snowflake/license)](https://packagist.org/packages/kra8/laravel-snowflake)
+
 This Laravel package to generate 64 bit identifier like the snowflake within Twitter.
 
 # Installation
