@@ -1,9 +1,17 @@
 language: php
 
+before_script:
+    - travis_retry composer self-update
+
 php: 7.0
 
 sudo: false
 
-install: true
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+    - travis_retry composer update
 
 script: vendor/bin/phpunit
