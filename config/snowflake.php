@@ -12,7 +12,7 @@ return [
     | Available Settings: Y-m-d H:i:s
     |
     */
-    'epoch' => env('SNOWFLAKE_EPOCH', '2019-10-13 00:00:00'),
+    'epoch' => env('SNOWFLAKE_EPOCH', '2019-04-01 00:00:00'),
 
     /*
     |--------------------------------------------------------------------------

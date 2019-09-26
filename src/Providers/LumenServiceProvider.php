@@ -11,8 +11,6 @@ class LumenServiceProvider extends AbstractServiceProvider
      */
     public function boot()
     {
-        $this->app->withFacades();
-
         $path = realpath(__DIR__.'/../../config/snowflake.php');
 
         $this->mergeConfigFrom($path, 'snowflake');
