@@ -3,13 +3,13 @@ language: php
 before_script:
     - travis_retry composer self-update
 
-php: 7.0
+php: 7.2
 
 sudo: false
 
 cache:
-  directories:
-    - $HOME/.composer/cache
+    directories:
+        - $HOME/.composer/cache
 
 install:
     - travis_retry composer update

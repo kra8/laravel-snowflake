@@ -1,11 +1,12 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Kra8\Snowflake\Test;
+
+use Illuminate\Support\Facades\Config;
 use Kra8\Snowflake\Snowflake;
 use Kra8\Snowflake\SnowflakeServiceProvider;
-use Illuminate\Support\Facades\Config;
 
-class SnowflakeTest extends Orchestra\Testbench\TestCase
+class SnowflakeTest extends AbstractTestCase
 {
     public function testNextId()
     {

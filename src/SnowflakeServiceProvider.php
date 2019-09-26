@@ -12,17 +12,17 @@ class SnowflakeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-     public function boot()
-     {
-         $this->publishes([
-             __DIR__ . '/../config/snowflake.php' => config_path('snowflake.php'),
-         ]);
-     }
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/snowflake.php' => config_path('snowflake.php'),
+        ]);
+    }
 
-     public function register()
-     {
-         $this->app->singleton(Snowflake::class, function () {
-             return new Snowflake();
-         });
-     }
+    public function register()
+    {
+        $this->app->singleton(Snowflake::class, function () {
+            return new Snowflake();
+        });
+    }
 }
