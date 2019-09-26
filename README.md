@@ -50,7 +50,7 @@ class User extends Authenticatable
 }
 ```
 
-Finally, in migrations, set the primary key to `bigInteger` and `primary`.
+Finally, in migrations, set the primary key to `bigInteger`, `unsigned` and `primary`.
 
 ``` php
 /**
@@ -62,7 +62,7 @@ public function up()
 {
     Schema::create('users', function (Blueprint $table) {
         // $table->increments('id');
-        $table->bigInteger('id')->primary();
+        $table->bigInteger('id')->unsigned()->primary();
         $table->string('name');
         $table->string('email')->unique();
         $table->string('password');
