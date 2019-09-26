@@ -7,9 +7,9 @@ This Laravel package to generate 64 bit identifier like the snowflake within Twi
 
 # Installation
 ```
-composer require "kra8/laravel-snowflake:^1.0"
+composer require "kra8/laravel-snowflake"
 
-php artisan vendor:publish --provider="Kra8\Snowflake\SnowflakeServiceProvider"
+php artisan vendor:publish --provider="Kra8\Snowflake\Providers\LaravelServiceProvider"
 ```
 # Usage
 Get instance
