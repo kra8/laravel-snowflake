@@ -1,29 +1,35 @@
 {
     "name": "kra8/laravel-snowflake",
-    "description": "Snowflake for Laravel.",
-    "keywords": ["snowflake", "laravel"],
+    "description": "Snowflake for Laravel and Lumen.",
+    "keywords": ["snowflake", "Laravel", "Lumen"],
     "authors": [{
         "name": "Koki Asai",
-        "email": "koki@asai.email"
+        "email": "koki@asai.dev"
     }],
     "homepage" : "https://github.com/kra8/laravel-snowflake",
     "license": "MIT",
     "require": {
-        "php": ">=7.0.0"
+        "php": "^7.0",
+        "illuminate/support": "^6.0"
     },
     "require-dev" : {
-		"phpunit/phpunit": "~6.0",
-        "orchestra/testbench": "~3.0"
+		"phpunit/phpunit": "~8.0",
+        "orchestra/testbench": "~4.0"
     },
     "autoload": {
         "psr-4": {
             "Kra8\\Snowflake\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Kra8\\Snowflake\\Test\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
-                "Kra8\\Snowflake\\SnowflakeServiceProvider"
+                "Kra8\\Snowflake\\Providers\\LaravelServiceProvider"
             ]
         }
     }

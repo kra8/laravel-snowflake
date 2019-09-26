@@ -2,8 +2,6 @@
 namespace Kra8\Snowflake;
 
 use Exception;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 
 class Snowflake
 {
@@ -23,19 +21,15 @@ class Snowflake
 
     private $workerId;
 
-    public function __construct()
+    /**
+     * @throws Exception
+     */
+    public function __construct($timestamp, $workerId = 1, $datacenterId = 1)
     {
-        if ($epoch = strtotime(Config::get('snowflake.epoch'))) {
-            // *1000 for msec.
-            $this->epoch = $epoch * 1000;
-        } else {
-            $errorLog = 'Fail read from snowflake epoch of config. Check date time format of epoch.';
-            Log::error($errorLog);
-            throw new Exception($errorLog);
-        }
+        $this->epoch = $timestamp * 1000;
 
-        $this->workerId         = Config::get('snowflake.worker_id', 1);
-        $this->datacenterId     = Config::get('snowflake.datacenter_id', 1);
+        $this->workerId         = $workerId;
+        $this->datacenterId     = $datacenterId;
         $this->lastTimestamp    = $this->epoch;
         $this->sequence         = 0;
     }
@@ -45,7 +39,7 @@ class Snowflake
      *
      * @return integer
      *
-     * @throw Exception
+     * @throws Exception
      */
     public function next()
     {
@@ -53,7 +47,6 @@ class Snowflake
 
         if ($timestamp < $this->lastTimestamp) {
             $errorLog = "Couldn't generation snowflake id, os time is backwards. [last timestamp:{$this->lastTimestamp}]";
-            Log::error($errorLog);
             throw new Exception($errorLog);
         }
 
