@@ -22,7 +22,12 @@ abstract class AbstractServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Snowflake::class, function () {
-            return new Snowflake();
+            $epoch = config('snowflake.epoch');
+            $workerId = config('snowflake.worker_id');
+            $datacenterId = config('snowflake.datacenter_id');
+
+            $timestamp = strtotime($epoch);
+            return new Snowflake($timestamp, $workerId, $datacenterId);
         });
     }
 }

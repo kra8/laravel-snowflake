@@ -21,4 +21,9 @@ abstract class AbstractTestCase extends TestCase
             'datacenter_id' => '1',
         ]);
     }
+
+    protected function getPackageProviders($app)
+    {
+        return ['Kra8\Snowflake\Providers\LaravelServiceProvider'];
+    }
 }
