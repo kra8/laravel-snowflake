@@ -13,7 +13,7 @@ class LumenServiceProvider extends AbstractServiceProvider
     {
         $this->app->withFacades();
 
-        $path = realpath(__DIR__.'/../config/snowflake.php');
+        $path = realpath(__DIR__.'/../../config/snowflake.php');
 
         $this->mergeConfigFrom($path, 'snowflake');
     }
