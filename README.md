@@ -5,12 +5,26 @@
 
 This Laravel package to generate 64 bit identifier like the snowflake within Twitter.
 
-# Installation
+# Laravel Installation
 ```
-composer require "kra8/laravel-snowflake:^1.0"
+composer require "kra8/laravel-snowflake"
 
-php artisan vendor:publish --provider="Kra8\Snowflake\SnowflakeServiceProvider"
+php artisan vendor:publish --provider="Kra8\Snowflake\Providers\LaravelServiceProvider"
 ```
+
+# Lumen Installation
+- Install via composer
+```
+composer require "kra8/laravel-snowflake"
+```
+
+- Bootstrap file changes
+Add the following snippet to the bootstrap/app.php file under the providers section as follows:
+``` php
+// Add this line
+$app->register(Kra8\Snowflake\Providers\LumenServiceProvider::class);
+```
+
 # Usage
 Get instance
 ``` php
