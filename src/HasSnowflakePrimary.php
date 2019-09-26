@@ -10,7 +10,7 @@ trait HasSnowflakePrimary
         static::saving(function ($model) {
             if (is_null($model->getKey())) {
                 $keyName    = $model->getKeyName();
-                $id         = resolve(Snowflake::class)->next();
+                $id         = app(Snowflake::class)->next();
                 $model->setAttribute($keyName, $id);
             }
         });
