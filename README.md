@@ -32,7 +32,7 @@ $snowflake = $this->app->make('Kra8\Snowflake\Snowflake');
 ```
 or
 ``` php
-$snowflake = resolve('Kra8\Snowflake\Snowflake');
+$snowflake = app('Kra8\Snowflake\Snowflake');
 ```
 
 Generate snowflake identifier
