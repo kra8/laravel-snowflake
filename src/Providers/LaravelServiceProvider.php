@@ -14,7 +14,7 @@ class LaravelServiceProvider extends AbstractServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/snowflake.php' => config_path('snowflake.php'),
+            __DIR__ . '/../../config/snowflake.php' => config_path('snowflake.php'),
         ]);
     }
 }
