@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2506d20b9af92854cf86e26a8aeb7b1b",
+    "content-hash": "c6299ae1f2b6679e5db995d15ea46b3a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -294,78 +294,17 @@
             "time": "2019-03-17T18:48:37+00:00"
         },
         {
-            "name": "illuminate/support",
+            "name": "laravel/framework",
             "version": "v6.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/illuminate/support.git",
-                "reference": "ee905d0fe7a5f956d2d611f7d7c633c24a4e3cae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/ee905d0fe7a5f956d2d611f7d7c633c24a4e3cae",
-                "reference": "ee905d0fe7a5f956d2d611f7d7c633c24a4e3cae",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/inflector": "^1.1",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "illuminate/contracts": "^6.0",
-                "nesbot/carbon": "^2.0",
-                "php": "^7.2"
-            },
-            "conflict": {
-                "tightenco/collect": "<5.5.33"
-            },
-            "suggest": {
-                "illuminate/filesystem": "Required to use the composer class (^6.0).",
-                "moontoast/math": "Required to use ordered UUIDs (^1.1).",
-                "ramsey/uuid": "Required to use Str::uuid() (^3.7).",
-                "symfony/process": "Required to use the composer class (^4.3.4).",
-                "symfony/var-dumper": "Required to use the dd function (^4.3.4).",
-                "vlucas/phpdotenv": "Required to use the Env class and env helper (^3.3)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Illuminate\\Support\\": ""
-                },
-                "files": [
-                    "helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The Illuminate Support package.",
-            "homepage": "https://laravel.com",
-            "time": "2019-11-29T13:39:31+00:00"
-        },
-        {
-            "name": "laravel/framework",
-            "version": "v6.5.2",
-            "source": {
-                "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cca8906654e72d7bb118c3c18bb55e74c109a766"
+                "reference": "0a8e3e6e96e5ec3af6b9f30026cb8e5551554875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cca8906654e72d7bb118c3c18bb55e74c109a766",
-                "reference": "cca8906654e72d7bb118c3c18bb55e74c109a766",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0a8e3e6e96e5ec3af6b9f30026cb8e5551554875",
+                "reference": "0a8e3e6e96e5ec3af6b9f30026cb8e5551554875",
                 "shasum": ""
             },
             "require": {
@@ -498,7 +437,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-11-19T14:52:01+00:00"
+            "time": "2019-12-03T15:23:55+00:00"
         },
         {
             "name": "league/flysystem",
