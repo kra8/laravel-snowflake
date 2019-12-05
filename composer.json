@@ -4,16 +4,16 @@
     "keywords": ["snowflake", "Laravel", "Lumen"],
     "authors": [{
         "name": "Koki Asai",
-        "email": "koki@asai.dev"
+        "email": "me@kra.dev"
     }],
     "homepage" : "https://github.com/kra8/laravel-snowflake",
     "license": "MIT",
     "require": {
-        "php": "^7.0",
+        "php": "^7.2.5",
         "illuminate/support": "^6.0"
     },
     "require-dev" : {
-		"phpunit/phpunit": "~8.0",
+        "phpunit/phpunit": "~8.0",
         "orchestra/testbench": "~4.0"
     },
     "autoload": {
