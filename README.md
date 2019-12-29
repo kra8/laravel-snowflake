@@ -41,7 +41,7 @@ $id = $snowflake->next();
 ```
 # Usage with Eloquent
 Add the `Kra8\Snowflake\HasSnowflakePrimary` trait to your Eloquent model.
-This trait make type `snowflake` of primary key.  Don't forget to set the Auto increment property to false.
+This trait make type `snowflake` of primary key.  Trait will automatically set $incrementing property to false.
 
 ``` php
 <?php
@@ -54,13 +54,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasSnowflakePrimary, Notifiable;
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
 }
 ```
 
