@@ -21,6 +21,10 @@ class Snowflake
 
     private $workerId;
 
+    private $timeout = 1000;
+
+    private $startTimeout = null;
+
     /**
      * @throws Exception
      */
@@ -45,8 +49,17 @@ class Snowflake
     {
         $timestamp = $this->timestamp();
 
-        if ($timestamp < $this->lastTimestamp) {
-            $errorLog = "Couldn't generation snowflake id, os time is backwards. [last timestamp:{$this->lastTimestamp}]";
+        if ($timestamp < static::$lastTimestamp) {
+            if (!$this->startTimeout) {
+                $this->startTimeout = $timestamp;
+            }
+
+            if (($timestamp - $this->startTimeout) < $this->timeout) {
+                usleep(static::$lastTimestamp - $timestamp);
+                return $this->next();
+            }
+
+            $errorLog = "[Timeout({$this->timeout})] Couldn't generation snowflake id, os time is backwards. [last timestamp:" . static::$lastTimestamp ."]";
             throw new Exception($errorLog);
         }
 
@@ -54,7 +67,7 @@ class Snowflake
             $this->sequence = $this->sequence + 1;
             if ($this->sequence > 4095) {
                 usleep(1);
-                $timestamp      = $this->timestamp();
+                $timestamp = $this->timestamp();
                 $this->sequence = 0;
             }
         } else {
