@@ -75,6 +75,7 @@ class Snowflake
         }
 
         $this->lastTimestamp = $timestamp;
+        $this->startTimeout = null;
 
         return (($timestamp - $this->epoch) << self::TIMESTAMP_LEFT_SHIFT)
         | ($this->datacenterId << self::DATACENTER_ID_LEFT_SHIFT)
