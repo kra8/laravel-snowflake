@@ -49,17 +49,17 @@ class Snowflake
     {
         $timestamp = $this->timestamp();
 
-        if ($timestamp < static::$lastTimestamp) {
+        if ($timestamp < $this->lastTimestamp) {
             if (!$this->startTimeout) {
                 $this->startTimeout = $timestamp;
             }
 
             if (($timestamp - $this->startTimeout) < $this->timeout) {
-                usleep(static::$lastTimestamp - $timestamp);
+                usleep($this->lastTimestamp - $timestamp);
                 return $this->next();
             }
 
-            $errorLog = "[Timeout({$this->timeout})] Couldn't generation snowflake id, os time is backwards. [last timestamp:" . static::$lastTimestamp ."]";
+            $errorLog = "[Timeout({$this->timeout})] Couldn't generation snowflake id, os time is backwards. [last timestamp:" . $this->lastTimestamp ."]";
             throw new Exception($errorLog);
         }
 
