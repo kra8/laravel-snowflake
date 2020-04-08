@@ -3,7 +3,6 @@
 namespace Kra8\Snowflake\Test;
 
 use Kra8\Snowflake\Snowflake;
-use Kra8\Snowflake\SnowflakeServiceProvider;
 
 class SnowflakeTest extends AbstractTestCase
 {
