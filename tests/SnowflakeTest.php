@@ -17,4 +17,16 @@ class SnowflakeTest extends AbstractTestCase
 
         $this->assertTrue($timestamp - $now < 3);
     }
+
+    public function testShortId()
+    {
+        $now    = strtotime(date('Y-m-d H:i:s'));
+        $epoch  = strtotime(config('snowflake.epoch')) * 1000;
+        $id     = app(Snowflake::class)->short();
+
+        $timestamp = $id >> 12;
+        $timestamp = (int) round(($timestamp + $epoch) / 1000);
+
+        $this->assertTrue($timestamp - $now < 3);
+    }
 }

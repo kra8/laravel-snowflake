@@ -57,7 +57,7 @@ class User extends Authenticatable
 }
 ```
 
-Finally, in migrations, set the primary key to `bigInteger`, `unsigned` and `primary`.
+Column type `id` is supported.
 
 ``` php
 /**
@@ -68,8 +68,7 @@ Finally, in migrations, set the primary key to `bigInteger`, `unsigned` and `pri
 public function up()
 {
     Schema::create('users', function (Blueprint $table) {
-        // $table->increments('id');
-        $table->bigInteger('id')->unsigned()->primary();
+        $table->id();
         $table->string('name');
         $table->string('email')->unique();
         $table->string('password');
@@ -79,6 +78,22 @@ public function up()
 }
 ```
 
+# JavaScript support
+Since JavaScript cannot handle 64-bit integers, there is also HasShortPrimary, which creates an ID for a 53-bit integer that can be handled by JavaScript.
+To use it, simply change HasSnowflakePrimary to HasShortPrimary.
+
+<?php
+namespace App;
+
+use Kra8\Snowflake\HasShortPrimary;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasShortPrimary, Notifiable;
+}
+```
 
 # Configuration
 If `config/snowflake.php` not exist, run below:
