@@ -79,9 +79,12 @@ public function up()
 ```
 
 # JavaScript support
+
 Since JavaScript cannot handle 64-bit integers, there is also HasShortPrimary, which creates an ID for a 53-bit integer that can be handled by JavaScript.
+
 To use it, simply change HasSnowflakePrimary to HasShortPrimary.
 
+``` php
 <?php
 namespace App;
 
