@@ -1,7 +1,7 @@
 {
     "name": "kra8/laravel-snowflake",
     "description": "Snowflake for Laravel and Lumen.",
-    "keywords": ["snowflake", "Laravel", "Lumen"],
+    "keywords": ["php", "snowflake", "Laravel", "Lumen"],
     "authors": [{
         "name": "Koki Asai",
         "email": "me@kra.dev"
