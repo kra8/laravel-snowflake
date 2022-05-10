@@ -18,6 +18,17 @@ class SnowflakeTest extends AbstractTestCase
         $this->assertTrue($timestamp - $now < 3);
     }
 
+    public function testMultipleNextId()
+    {
+        $instance = app(Snowflake::class);
+
+        $ids = [];
+        foreach (range(0, 1000) as $_) {
+            $ids[] = $instance->next();
+        }
+        $this->assertTrue(array_unique($ids) === $ids);
+    }
+
     public function testShortId()
     {
         $now    = strtotime(date('Y-m-d H:i:s'));
@@ -28,5 +39,15 @@ class SnowflakeTest extends AbstractTestCase
         $timestamp = (int) round(($timestamp + $epoch) / 1000);
 
         $this->assertTrue($timestamp - $now < 3);
+    }
+
+    public function testMultipleShortId()
+    {
+        $instance = app(Snowflake::class);
+        $ids = [];
+        foreach (range(0, 1000) as $_) {
+            $ids[] = $instance->short();
+        }
+        $this->assertTrue(array_unique($ids) === $ids);
     }
 }
