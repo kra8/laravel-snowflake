@@ -138,7 +138,7 @@ class Snowflake
         $binaryWorkerId = substr($id, -$datacenterIdLeftShift, self::WORKER_ID_BITS);
         $binaryDatacenterId = substr($id, -$timestampLeftShift, self::DATACENTER_ID_BITS);
         $timestamp = bindec($binaryTimestamp);
-        $datetime = date('Y-m-d H:i:s', ((($timestamp + $this->epoch) / 1000) | 0));
+        $datetime = date('Y-m-d H:i:s', ((int) (($timestamp + $this->epoch) / 1000) | 0));
 
         return [
             'binary_length' => strlen($id),
