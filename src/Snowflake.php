@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kra8\Snowflake;
-
-use Exception;
 
 class Snowflake
 {
@@ -19,6 +19,8 @@ class Snowflake
     protected const SEQUENCE_BITS = 12;
 
     protected const TIMEOUT = 1000;
+
+    protected const MAX_SEQUENCE = 4095;
 
     /**
      * The epoch time.
@@ -70,51 +72,69 @@ class Snowflake
         $this->lastTimestamp = $this->epoch;
     }
 
+    public function makeSequenceId(int $currentTime, int $max = self::MAX_SEQUENCE): int
+    {
+        if ($this->lastTimestamp === $currentTime) {
+            $this->sequence = $this->sequence + 1;
+            return $this->sequence;
+        }
+
+        $this->sequence = mt_rand(0, $max);
+        $this->lastTimestamp = $currentTime;
+        return $this->sequence;
+    }
+
     /**
      * Generate the 64bit unique id.
      *
-     * @return integer
-     *
-     * @throws Exception
+     * @return int
      */
-    public function next()
+    public function id(): int
     {
-        $timestamp = $this->timestamp();
-
-        // もし、今回生成したタイムスタンプが、前回生成したタイムスタンプより過去のものなら、待機する
-        // そもそもこのような状況が起こるのかは不明なので、不要かもしれない。
-        if ($timestamp < $this->lastTimestamp) {
-            $waitTime = $this->lastTimestamp - $timestamp;
-
-            // 待機時間がtimeout以上なら、例外を投げる
-            if ($waitTime > self::TIMEOUT) {
-                $errorLog = "[Timeout({self::TIMEOUT})] Couldn't generation snowflake id, os time is backwards. [last timestamp:" . $this->lastTimestamp ."]";
-                throw new Exception($errorLog);
-            }
-
-            // 待機時間がtimeout以下なら、待機して再生成
-            usleep($this->lastTimestamp - $timestamp);
-            return $this->next();
+        $currentTime = $this->timestamp();
+        while (($sequenceId = $this->makeSequenceId($currentTime)) > self::MAX_SEQUENCE) {
+            usleep(1);
+            $currentTime = $this->timestamp();
         }
 
-        // タイムスタンプが同じなら、シーケンスをインクリメント
-        if ($timestamp === $this->lastTimestamp) {
-            $this->sequence = $this->sequence + 1;
-            // シーケンス番号が最大値を超えたら、待機して再生成
-            if ($this->sequence > 4095) {
-                usleep(1);
-                $this->sequence = 0;
-                return $this->next();
-            }
-        } else {
-            $this->sequence = mt_rand(0, 4095);
-        }
-
-        $this->lastTimestamp = $timestamp;
-        return $this->toSnowflakeId($timestamp - $this->epoch, $this->sequence);
+        $this->lastTimestamp = $currentTime;
+        return $this->toSnowflakeId($currentTime - $this->epoch, $sequenceId);
     }
 
-    public function toSnowflakeId(int $currentTime, int $sequence)
+    /**
+     * Generate the 64bit unique id.
+     *
+     * @return int
+     */
+    public function next(): int
+    {
+        return $this->id();
+    }
+
+    /**
+     * Create 53bit Id.
+     * timestamp_bits(41) + sequence_bits(12)
+     *
+     * @return int
+     */
+    public function short(): int
+    {
+        $currentTime = $this->timestamp();
+        while (($sequenceId = $this->makeSequenceId($currentTime)) > self::MAX_SEQUENCE) {
+            usleep(1);
+            $currentTime = $this->timestamp();
+        }
+
+        $this->lastTimestamp = $currentTime;
+        return $this->toShortflakeId($currentTime - $this->epoch, $sequenceId);
+    }
+
+    public function toShortflakeId(int $currentTime, int $sequenceId)
+    {
+        return ($currentTime << self::SEQUENCE_BITS) | ($sequenceId);
+    }
+
+    public function toSnowflakeId(int $currentTime, int $sequenceId)
     {
         $workerIdLeftShift = self::SEQUENCE_BITS;
         $datacenterIdLeftShift = self::WORKER_ID_BITS + self::SEQUENCE_BITS;
@@ -123,7 +143,17 @@ class Snowflake
         return ($currentTime << $timestampLeftShift)
             | ($this->datacenterId << $datacenterIdLeftShift)
             | ($this->workerId << $workerIdLeftShift)
-            | ($sequence);
+            | ($sequenceId);
+    }
+
+    /**
+     * Return the now unixtime.
+     *
+     * @return int
+     */
+    public function timestamp(): int
+    {
+        return (int) floor(microtime(true) * 1000);
     }
 
     public function parse(int $id): array
@@ -154,27 +184,5 @@ class Snowflake
             'epoch' => $this->epoch,
             'datetime' => $datetime,
         ];
-    }
-
-    /**
-     * Create 53bit Id.
-     * timestamp_bits(41) + sequence_bits(12)
-     *
-     * @return int
-     */
-    public function short(): int
-    {
-        $parsed = $this->parse($this->next());
-        return $parsed['timestamp'] << 12 | $parsed['sequence'];
-    }
-
-    /**
-     * Return the now unixtime.
-     *
-     * @return int
-     */
-    public function timestamp(): int
-    {
-        return floor(microtime(true) * 1000) | 0;
     }
 }
