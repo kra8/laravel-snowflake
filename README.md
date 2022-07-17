@@ -88,13 +88,13 @@ To use it, simply change HasSnowflakePrimary to HasShortPrimary.
 <?php
 namespace App;
 
-use Kra8\Snowflake\HasShortPrimary;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasShortPrimary, Notifiable;
+    use HasShortflakePrimary, Notifiable;
 }
 ```
 
