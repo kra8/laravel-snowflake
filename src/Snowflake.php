@@ -60,7 +60,7 @@ class Snowflake
     /**
      * Create a new Snowflake instance.
      */
-    public function __construct(int $timestamp = null, int $workerId = 1, int $datacenterId = 1)
+    public function __construct(?int $timestamp = null, int $workerId = 1, int $datacenterId = 1)
     {
         if ($timestamp === null) {
             $timestamp = strtotime(self::DEFAULT_EPOCH_DATETIME);
