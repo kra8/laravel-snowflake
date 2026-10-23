@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.2.35-fpm-alpine
 SHELL ["/bin/ash", "-oeux", "pipefail", "-c"]
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
